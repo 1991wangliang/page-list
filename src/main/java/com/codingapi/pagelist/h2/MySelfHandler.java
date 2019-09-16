@@ -1,14 +1,19 @@
 package com.codingapi.pagelist.h2;
 
+import java.util.Arrays;
+
 /**
  * @author lorne
  * @date 2019-09-11
  * @description
  */
-public class BaseHandler extends Handler {
+public class MySelfHandler implements ColumnHandler {
 
     @Override
-    public String request(String type) {
+    public String request(String name,String type,String...columns) {
+        if(Arrays.asList(columns).contains(name)){
+            return "varchar(5000)";
+        }
         if("java.lang.String".equals(type)){
             return "varchar(100)";
         }
@@ -20,9 +25,6 @@ public class BaseHandler extends Handler {
         }
         if("java.lang.Long".equals(type)){
             return "bigint";
-        }
-        if (getNextHandler()!=null){
-            return getNextHandler().request(type);
         }
         return null;
     }
