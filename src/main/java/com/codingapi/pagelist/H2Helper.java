@@ -5,6 +5,9 @@ import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.ResultSetHandler;
+import org.apache.commons.dbutils.handlers.BeanHandler;
+import org.apache.commons.dbutils.handlers.ScalarHandler;
+import org.apache.commons.dbutils.handlers.columns.IntegerColumnHandler;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -33,6 +36,11 @@ public class H2Helper {
 
     public <T> List<T> query(String sql,ResultSetHandler<List<T>> resultSetHandler) throws SQLException {
         return queryRunner.query(sql, resultSetHandler);
+    }
+
+
+    public long count(String sql,Object ... params) throws SQLException {
+        return queryRunner.query(sql,params, new ScalarHandler<>(1));
     }
 
 }

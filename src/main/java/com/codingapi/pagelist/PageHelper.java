@@ -2,6 +2,7 @@ package com.codingapi.pagelist;
 
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.dbutils.ResultSetHandler;
+import org.apache.commons.dbutils.handlers.columns.IntegerColumnHandler;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -66,5 +67,15 @@ public class PageHelper {
      */
     public void dropTable(String name) throws SQLException{
         h2Helper.update("drop table "+name);
+    }
+
+    /**
+     * 检查是否存在表名
+     * @param name table-name
+     * @return 是否存在
+     * @throws SQLException
+     */
+    public boolean haveTable(String name) throws SQLException{
+        return h2Helper.count("SELECT COUNT(*) AS count FROM information_schema.tables WHERE table_name = ?",name.toUpperCase())>0;
     }
 }
