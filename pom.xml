@@ -87,7 +87,7 @@
                 <env>coding-api</env>
                 <repository.id>Releases</repository.id>
                 <repository.name>Team Nexus Repository</repository.name>
-                <repository.url>http://ui.api:8081/repository/maven-releases/</repository.url>
+                <repository.url>http://mr.io/nexus/content/repositories/releases/</repository.url>
             </properties>
             <build>
                 <plugins>
